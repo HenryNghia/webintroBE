@@ -8,7 +8,7 @@ using webintroBE.Models;
 
 namespace webintroBE.Controllers
 {
-    [Route("api/")]
+    [Route("api/bai-viets/")]
     [ApiController]
     public class BaiVietController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace webintroBE.Controllers
             _context = context;
         }
         [HttpGet]
-        [Route("bai-viet/getdata")]
+        [Route("getdata")]
         public async Task<ApiResponse> GetBaiViets()
         {
             var baiviets = await _context.BaiViets
@@ -28,8 +28,8 @@ namespace webintroBE.Controllers
             return new ApiResponse(200, "Day la message", baiviets);
         }
 
-        [HttpGet("bai-viet/getdata/{id}")]
-        public async Task<ApiResponse> GetByBaiVietSelectId(int id)
+        [HttpGet("getdata/{id}")]
+        public async Task<ApiResponse> GetByBaiVietSelectId([FromRoute] int id)
         {
             var baiviet = await _context.BaiViets.FindAsync(id);
             if (baiviet == null)
@@ -42,7 +42,7 @@ namespace webintroBE.Controllers
         }
 
         [HttpPost]
-        [Route("bai-viet/createdata")]
+        [Route("createdata")]
         public async Task<ApiResponse> CreateBaiViet([FromBody] CreateBaiVietDTO createBaiVietDTO)
 
         {
@@ -58,8 +58,8 @@ namespace webintroBE.Controllers
             return new ApiResponse(200, "Day la message", baiviet);
         }
 
-        [HttpPut("bai-viet/updatedata/{id}")]
-        public async Task<ApiResponse> UpdateBaiViet(int id, [FromBody] UpdateBaiVietDTO updateBaiVietDTO)
+        [HttpPut("updatedata/{id}")]
+        public async Task<ApiResponse> UpdateBaiViet([FromRoute] int id, [FromBody] UpdateBaiVietDTO updateBaiVietDTO)
         {
             var baiviet = _context.BaiViets.FirstOrDefault(x => x.Id == id);
             if (baiviet == null)
@@ -74,9 +74,9 @@ namespace webintroBE.Controllers
             return new ApiResponse(200, "cap nhat thanh cong", baiviet);
         }
 
-        [HttpDelete("bai-viet/deletedata/{id}")]
+        [HttpDelete("deletedata/{id}")]
 
-        public async Task<ApiResponse> DeleteBaiViet(int id)
+        public async Task<ApiResponse> DeleteBaiViet([FromRoute] int id)
         {
             var product = await _context.BaiViets.FindAsync(id);
             if (product == null)
