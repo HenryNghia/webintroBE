@@ -10,5 +10,6 @@ namespace webintroBE.Data
         { }
 
         public DbSet<BaiViet> BaiViets { get; set; }
+        public DbSet<Email> Emails { get; set; }
     }
 }
