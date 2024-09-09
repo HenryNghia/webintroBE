@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webintroBE.Data;
 using webintroBE.DTOs;
+using webintroBE.DTOs.BaiViet;
+using webintroBE.Models;
 
 namespace webintroBE.Controllers
 {
@@ -41,8 +43,15 @@ namespace webintroBE.Controllers
 
         [HttpPost]
         [Route("bai-viet/createdata")]
-        public async Task<ApiResponse> CreateBaiViet(BaiViet baiviet)
+        public async Task<ApiResponse> CreateBaiViet([FromBody] CreateBaiVietDTO createBaiVietDTO)
+
         {
+            var baiviet = new BaiViet
+            {
+                Title = createBaiVietDTO.Title,
+                Image = createBaiVietDTO.Image,
+                Content = createBaiVietDTO.Content,
+            };
             _context.BaiViets.Add(baiviet);
             await _context.SaveChangesAsync();
 
@@ -50,31 +59,19 @@ namespace webintroBE.Controllers
         }
 
         [HttpPut("bai-viet/updatedata/{id}")]
-        public async Task<ApiResponse> UpdateBaiViet(int id, BaiViet baiviet)
+        public async Task<ApiResponse> UpdateBaiViet(int id, [FromBody] UpdateBaiVietDTO updateBaiVietDTO)
         {
-            if (id != baiviet.Id)
+            var baiviet = _context.BaiViets.FirstOrDefault(x => x.Id == id);
+            if (baiviet == null)
             {
                 return new ApiResponse(400, "Loi");
             }
+            baiviet.Title = updateBaiVietDTO.Title;
+            baiviet.Image = updateBaiVietDTO.Image;
+            baiviet.Content = updateBaiVietDTO.Content;
 
-            _context.Entry(baiviet).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-                return new ApiResponse(200, "cap nhat thanh cong", baiviet);
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                if (!BaiVietExists(id))
-                {
-                    return new ApiResponse(404, "Loi");
-                }
-                else
-                {
-                    return new ApiResponse(404, ex.Message);
-                }
-            }
+            await _context.SaveChangesAsync();
+            return new ApiResponse(200, "cap nhat thanh cong", baiviet);
         }
 
         [HttpDelete("bai-viet/deletedata/{id}")]
