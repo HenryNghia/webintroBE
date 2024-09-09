@@ -4,6 +4,7 @@ using webintroBE.Data;
 using webintroBE.DTOs;
 using System.Threading.Tasks;
 using webintroBE.DTOs.Email;
+using webintroBE.Models;
 
 namespace webintroBE.Controllers
 {
