@@ -1,0 +1,6 @@
+@webintroBE_HostAddress = http://localhost:5167
+
+GET {{webintroBE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
