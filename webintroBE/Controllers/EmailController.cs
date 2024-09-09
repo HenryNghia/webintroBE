@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using webintroBE.Data;
 using webintroBE.DTOs;
 using System.Threading.Tasks;
+using webintroBE.DTOs.Email;
 
 namespace webintroBE.Controllers
 {

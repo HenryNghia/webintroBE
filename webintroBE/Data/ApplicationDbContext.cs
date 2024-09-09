@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using webintroBE.DTOs;
+using webintroBE.Models;
 
 namespace webintroBE.Data
 

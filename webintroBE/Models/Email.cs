@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace webintroBE.DTOs
+namespace webintroBE.Models
 {
-    public class AddEmailDTO
+    public class Email
     {
+        public int ID { get; set; }
+        [MaxLength(100)]
         public required string Name { get; set; } = "";
         [MaxLength(100)]
         public string Surname { get; set; } = "";
@@ -11,5 +13,6 @@ namespace webintroBE.DTOs
         public required string Emailuser { get; set; } = "";
         [MaxLength]
         public required string Content { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
     }
 }
