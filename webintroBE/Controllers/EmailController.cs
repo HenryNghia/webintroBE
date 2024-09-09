@@ -8,7 +8,7 @@ using webintroBE.Models;
 
 namespace webintroBE.Controllers
 {
-    [Route("api/")]
+    [Route("api/email/")]
     [ApiController]
     public class EmailController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace webintroBE.Controllers
 
         // Lấy tất cả email
         [HttpGet]
-        [Route("email/getdata")]
+        [Route("getdata")]
         public async Task<IActionResult> GetEmails()
         {
             var emails = await _context.Emails
@@ -31,8 +31,8 @@ namespace webintroBE.Controllers
         }
 
         // Lấy email theo ID
-        [HttpGet("email/getdata/{id}")]
-        public async Task<IActionResult> GetEmailById(int id)
+        [HttpGet("getdata/{id}")]
+        public async Task<IActionResult> GetEmailById([FromRoute] int id)
         {
             var email = await _context.Emails.FindAsync(id);
             if (email == null)
@@ -44,7 +44,7 @@ namespace webintroBE.Controllers
 
         // Tạo email mới
         [HttpPost]
-        [Route("email/createdata")]
+        [Route("createdata")]
         public async Task<IActionResult> CreateEmail([FromBody] AddEmailDTO addEmailDTO)
         {
             var email = new Email
@@ -63,8 +63,8 @@ namespace webintroBE.Controllers
         }
 
         // Xóa email
-        [HttpDelete("email/deletedata/{id}")]
-        public async Task<IActionResult> DeleteEmail(int id)
+        [HttpDelete("deletedata/{id}")]
+        public async Task<IActionResult> DeleteEmail([FromRoute] int id)
         {
             var email = await _context.Emails.FindAsync(id);
             if (email == null)
