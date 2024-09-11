@@ -12,5 +12,7 @@ namespace webintroBE.DTOs.BaiViet
 
         [MaxLength(5000)]
         public required string Content { get; set; } = "";
+
+        public DateTime CreatedAt { get; set; }
     }
 }
