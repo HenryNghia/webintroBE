@@ -21,7 +21,7 @@ namespace webintroBE.Controllers
 
         // Lấy tất cả email
         [HttpGet]
-        [Route("getdata")]
+        [Route("")]
         public async Task<IActionResult> GetEmails()
         {
             var emails = await _context.Emails
@@ -31,7 +31,7 @@ namespace webintroBE.Controllers
         }
 
         // Lấy email theo ID
-        [HttpGet("getdata/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetEmailById([FromRoute] int id)
         {
             var email = await _context.Emails.FindAsync(id);
@@ -44,7 +44,7 @@ namespace webintroBE.Controllers
 
         // Tạo email mới
         [HttpPost]
-        [Route("createdata")]
+        [Route("")]
         public async Task<IActionResult> CreateEmail([FromBody] AddEmailDTO addEmailDTO)
         {
             var email = new Email
@@ -63,7 +63,7 @@ namespace webintroBE.Controllers
         }
 
         // Xóa email
-        [HttpDelete("deletedata/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmail([FromRoute] int id)
         {
             var email = await _context.Emails.FindAsync(id);
