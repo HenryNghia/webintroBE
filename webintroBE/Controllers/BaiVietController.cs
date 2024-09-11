@@ -51,6 +51,7 @@ namespace webintroBE.Controllers
                 Title = createBaiVietDTO.Title,
                 Image = createBaiVietDTO.Image,
                 Content = createBaiVietDTO.Content,
+                CreatedAt = DateTime.Now,
             };
             _context.BaiViets.Add(baiviet);
             await _context.SaveChangesAsync();
