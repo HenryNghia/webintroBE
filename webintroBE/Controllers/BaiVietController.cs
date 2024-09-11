@@ -19,7 +19,7 @@ namespace webintroBE.Controllers
             _context = context;
         }
         [HttpGet]
-        [Route("getdata")]
+        [Route("")]
         public async Task<ApiResponse> GetBaiViets()
         {
             var baiviets = await _context.BaiViets
@@ -28,7 +28,7 @@ namespace webintroBE.Controllers
             return new ApiResponse(200, "Day la message", baiviets);
         }
 
-        [HttpGet("getdata/{id}")]
+        [HttpGet("{id}")]
         public async Task<ApiResponse> GetByBaiVietSelectId([FromRoute] int id)
         {
             var baiviet = await _context.BaiViets.FindAsync(id);
@@ -42,7 +42,7 @@ namespace webintroBE.Controllers
         }
 
         [HttpPost]
-        [Route("createdata")]
+        [Route("")]
         public async Task<ApiResponse> CreateBaiViet([FromBody] CreateBaiVietDTO createBaiVietDTO)
 
         {
@@ -58,7 +58,7 @@ namespace webintroBE.Controllers
             return new ApiResponse(200, "Day la message", baiviet);
         }
 
-        [HttpPut("updatedata/{id}")]
+        [HttpPut("{id}")]
         public async Task<ApiResponse> UpdateBaiViet([FromRoute] int id, [FromBody] UpdateBaiVietDTO updateBaiVietDTO)
         {
             var baiviet = _context.BaiViets.FirstOrDefault(x => x.Id == id);
@@ -74,7 +74,7 @@ namespace webintroBE.Controllers
             return new ApiResponse(200, "cap nhat thanh cong", baiviet);
         }
 
-        [HttpDelete("deletedata/{id}")]
+        [HttpDelete("{id}")]
 
         public async Task<ApiResponse> DeleteBaiViet([FromRoute] int id)
         {
